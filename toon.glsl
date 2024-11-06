@@ -104,12 +104,12 @@ void shade(V2F inputs) {
     vec3 viewDirectionWS = getEyeVec(inputs.position);
     vec3 halfVector = normalize(lightDirection + viewDirectionWS);
     float LoH = saturate(dot(lightDirection, halfVector));
-	float NoH = saturate(dot(normalWS, halfVector));
+    float NoH = saturate(dot(normalWS, halfVector));
 
     float roughness = getRoughness(roughness_tex, inputs.sparse_coord);
     roughness = max((roughness * roughness), 0.002);
 
-	vec3 specular = saturate(lilTooningNoSaturateScale(1, pow(NoH, 1.0 / roughness), specular_border, specular_blur, 0.0)) * lightColor;
+    vec3 specular = saturate(lilTooningNoSaturateScale(1, pow(NoH, 1.0 / roughness), specular_border, specular_blur, 0.0)) * lightColor;
 
     color *= albedo;
     if (emission_multiply_base)
